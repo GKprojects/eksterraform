@@ -1,3 +1,12 @@
+module "vpc" {
+  source                   = "../vpc"
+  vpc_cidr_block           = "10.0.0.0/16"
+  public_subnet_cidr_block = "10.0.0.0/19"
+  public_subnet_cidr_block_second =  "10.0.32.0/19"
+  private_subnet_cidr_block = "10.0.64.0/19"
+  private_subnet_second_cidr_block = "10.0.96.0/19"
+}
+
 resource "aws_iam_role" "cluster_role" {
   name = "eks-cluster-role"
 
@@ -27,7 +36,7 @@ resource "aws_eks_cluster" "cluster" {
   role_arn = aws_iam_role.cluster_role.arn
 
   vpc_config {
-    subnet_ids = concat(module.vpc.private_subnet_ids)
+    subnet_ids = module.vpc.private_subnet_ids
   }
 
   depends_on = [aws_iam_role_policy_attachment.cluster-AmazonEKSClusterPolicy]
@@ -67,13 +76,11 @@ resource "aws_eks_node_group" "private-nodes" {
   node_group_name = "private-nodes"
   node_role_arn   = aws_iam_role.nodes.arn
 
-  subnet_ids = [
-    aws_subnet.private-us-east-1a.id,
-    aws_subnet.private-us-east-1b.id
-  ]
+  subnet_ids = module.vpc.private_subnet_ids
+  
 
   capacity_type  = "ON_DEMAND"
-  instance_types = var.instance_types
+  instance_types = [var.instance_types]
 
   scaling_config {
     desired_size = var.node_desired

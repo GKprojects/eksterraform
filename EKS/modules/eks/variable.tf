@@ -1,5 +1,5 @@
 variable "instance_types" {
-    type = list()
+    type = string
 }
 variable "node_desired" {
   type = number
