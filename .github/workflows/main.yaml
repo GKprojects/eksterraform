@@ -42,7 +42,7 @@ jobs:
     #   secrets: inherit
 
     Docker_build:
-      needs: Sbom
+      # needs: Sbom
       name: Docker build
       uses: ./.github/workflows/docker.yml
       secrets: inherit
