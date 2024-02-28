@@ -47,7 +47,7 @@ jobs:
     #   uses: ./.github/workflows/docker.yml
     #   secrets: inherit
     Deployment:
-      needs: Docker_build
+      # needs: Docker_build
       name: Deployment
       uses: ./.github/workflows/deploy.yml
       secrets: inherit
