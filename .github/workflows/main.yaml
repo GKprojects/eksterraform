@@ -41,11 +41,11 @@ jobs:
     #   uses: ./.github/workflows/sbom.yml
     #   secrets: inherit
 
-    Docker_build:
-      # needs: Sbom
-      name: Docker build
-      uses: ./.github/workflows/docker.yml
-      secrets: inherit
+    # Docker_build:
+    #   # needs: Sbom
+    #   name: Docker build
+    #   uses: ./.github/workflows/docker.yml
+    #   secrets: inherit
     Deployment:
       needs: Docker_build
       name: Deployment
