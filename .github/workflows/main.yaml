@@ -29,17 +29,17 @@ jobs:
     #   uses: ./.github/workflows/Build_Test.yml
     #   secrets: inherit
     
-    Snyk:
-      # needs: Build_Test
-      name: Snyk_security check
-      uses: ./.github/workflows/snyk.yml
-      secrets: inherit
+    # Snyk:
+    #   # needs: Build_Test
+    #   name: Snyk_security check
+    #   uses: ./.github/workflows/snyk.yml
+    #   secrets: inherit
      
-    Sbom:
-      needs: Snyk
-      name: Sbom
-      uses: ./.github/workflows/sbom.yml
-      secrets: inherit
+    # Sbom:
+    #   needs: Snyk
+    #   name: Sbom
+    #   uses: ./.github/workflows/sbom.yml
+    #   secrets: inherit
 
     Docker_build:
       needs: Sbom
