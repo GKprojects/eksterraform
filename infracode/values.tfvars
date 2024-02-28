@@ -1,7 +1,11 @@
 vpc_cidr_block           = "10.0.0.0/16"
-public_subnet_cidr_block = "10.0.1.0/24"
-private_subnet_cidr_block = "10.0.2.0/24"
+public_subnet_cidr_block = "10.0.0.0/18"
+private_subnet_cidr_block = "10.0.64.0/18"
+private_subnet_second_cidr_block = "10.0.128.0/18"
 
+access_key = ""
+secret_key = ""
+subnet_availability_zone = 
 #cluster details
 cluster_name        = "my-cluster"
 node_instance_type  = "t3.medium"
@@ -13,6 +17,4 @@ node_labels = {
   environment = "production"
   role        = "worker"
 }
-
-# VPC settings
-vpc_cidr_block = "10.0.0.0/16"
+desired_nodes = "2"

@@ -24,6 +24,9 @@ variable "public_subnet_cidr_block" {
 variable "private_subnet_cidr_block" {
   description = "CIDR block for the private subnet"
 }
+variable "private_subnet_second_cidr_block" {
+  description = "CIDR block for the second private subnet"
+}
 
 # Cluster creation ----------------------------------------------------------------------
 # Variables
@@ -34,7 +37,7 @@ variable "max_nodes" {}
 variable "node_labels" {
   type = map(string)
 }
-variable "vpc_cidr_block" {}
-variable "subnet_cidr_block" {}
-variable "subnet_availability_zone" {}
+variable "subnet_ids" {
+  type = list
+}
 variable "desired_nodes" {}
