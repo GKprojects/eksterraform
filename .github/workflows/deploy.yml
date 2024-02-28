@@ -1,0 +1,42 @@
+name: javaapp deployment
+on:
+  workflow_call:
+jobs:
+  build_and_test:
+      runs-on: ubuntu-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Use Node.js 
+        uses: actions/setup-node@v1
+        with:
+          node-version: 11.x
+        
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          repository: GKprojects/Deployment   # Replace with the repository URL
+          ref: main 
+          token: ${{secrets.PAT_TOKEN }}
+   
+      - name: Modify Manifest
+        run: |
+              # Replace the image and tag in the manifest file
+               echo "GitHub SHA: ${{ github.run_number }}"
+               sed -i "s|${{ secrets.DOCKER_REPO }}:.*|${{ secrets.DOCKER_REPO }}:${{ github.run_number }}|" deployment.yaml
+     
+      - name: Debug - Show Git Status After Changes
+        run: git status
+        shell: bash
+   
+  
+      - name: Commit and Push Change
+        run: |
+              git config --global user.name "Hamritha02"
+              git config --global user.email "hamrithaanand02@gmail.com"
+              git add deployment.yaml
+              git commit -m "Update image tag with github.run no."
+              git push origin main  
+        env:
+            PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
