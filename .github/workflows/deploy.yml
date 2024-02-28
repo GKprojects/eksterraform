@@ -36,7 +36,7 @@ jobs:
               git config --global user.name "GKprojects"
               git config --global user.email "ponngokul98@gmail.com"
               git add deployment.yaml
-              git commit -m "Update image tag with github.run no."
+              git commit -m "Update image with ${{ github.run_number }}"
               git push
         env:
             PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
