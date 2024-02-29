@@ -21,8 +21,8 @@ jobs:
         continue-on-error: true
 
 
-    - name: Upload KICS JSON artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: "KICKS-results"
-        path: myResults
+      - name: Upload KICS JSON artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: "KICKS-results"
+          path: myResults
