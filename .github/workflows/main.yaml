@@ -22,9 +22,14 @@ jobs:
       name: Talisman
       uses: ./.github/workflows/talisman.yml
       secrets: inherit
-    
-    Build_Test:
+    KICS:
       needs: Talisman
+      name: KICS
+      uses: ./.github/workflows/KICS.yml
+      secrets: inherit 
+
+    Build_Test:
+      needs: KICS
       name: Build and Test
       uses: ./.github/workflows/Build_Test.yml
       secrets: inherit
