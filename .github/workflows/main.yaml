@@ -22,6 +22,7 @@ jobs:
       name: Talisman
       uses: ./.github/workflows/talisman.yml
       secrets: inherit
+      
     KICS:
       needs: Talisman
       name: KICS
