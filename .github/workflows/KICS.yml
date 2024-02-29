@@ -3,22 +3,22 @@ on:
   workflow_dispatch:
   workflow_call:
 jobs:
-KICS_Scan:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v3
-      with:
-        repository: ${{ github.repository }}
-        ref: ${{ github.ref_name }}
-        token: ${{ secrets.PAT_TOKEN }}
-    - name: run KICS Scan
-      uses: checkmarx/kics-github-action@v1.7.0
-      with:
-          # scanning two directories: ./terraform/ ./cfn-templates/ plus a single file
-        path: ./EKS/
-        output_path: myResults/
-      continue-on-error: true
+  KICS_Scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref_name }}
+          token: ${{ secrets.PAT_TOKEN }}
+      - name: run KICS Scan
+        uses: checkmarx/kics-github-action@v1.7.0
+        with:
+            # scanning two directories: ./terraform/ ./cfn-templates/ plus a single file
+          path: ./EKS/
+          output_path: myResults/
+        continue-on-error: true
 
 
     - name: Upload KICS JSON artifact
