@@ -84,7 +84,7 @@ resource "aws_route_table" "private" {
 
   route = [
     {
-      cidr_block                 = "0.0.0.0/0"
+      cidr_block                 = ["10.0.64.0/19","10.0.96.0/19"]
       nat_gateway_id             = aws_nat_gateway.nat.id
       carrier_gateway_id         = ""
       destination_prefix_list_id = ""
@@ -110,7 +110,7 @@ resource "aws_route_table" "public" {
 
   route = [
     {
-      cidr_block                 = "0.0.0.0/0"
+      cidr_block                 = ["10.0.0.0/19","10.0.32.0/19"]
       gateway_id                 = aws_internet_gateway.igw.id
       nat_gateway_id             = ""
       carrier_gateway_id         = ""
