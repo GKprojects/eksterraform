@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
 
 jobs:
-    docker_build_push:
+    docker_build_push_trivy_scan:
           runs-on: ubuntu-latest
           steps:
           - name: Checkout
