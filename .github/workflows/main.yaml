@@ -36,7 +36,7 @@ jobs:
       secrets: inherit
     
     Snyk:
-      # needs: Build_Test
+      needs: Build_Test
       name: Snyk_security check
       uses: ./.github/workflows/snyk.yml
       secrets: inherit
