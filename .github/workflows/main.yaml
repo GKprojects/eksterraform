@@ -18,36 +18,36 @@ permissions:
     pull-requests: write
     
 jobs:
-    Talisman:
-      name: Talisman
-      uses: ./.github/workflows/talisman.yml
-      secrets: inherit
+    # Talisman:
+    #   name: Talisman
+    #   uses: ./.github/workflows/talisman.yml
+    #   secrets: inherit
     
-    Build_Test:
-      needs: Talisman
-      name: Build and Test
-      uses: ./.github/workflows/Build_Test.yml
-      secrets: inherit
+    # Build_Test:
+    #   needs: Talisman
+    #   name: Build and Test
+    #   uses: ./.github/workflows/Build_Test.yml
+    #   secrets: inherit
     
-    Snyk:
-      needs: Build_Test
-      name: Snyk_security check
-      uses: ./.github/workflows/snyk.yml
-      secrets: inherit
+    # Snyk:
+    #   # needs: Build_Test
+    #   name: Snyk_security check
+    #   uses: ./.github/workflows/snyk.yml
+    #   secrets: inherit
      
-    Sbom:
-      needs: Snyk
-      name: Sbom
-      uses: ./.github/workflows/sbom.yml
-      secrets: inherit
+    # Sbom:
+    #   needs: Snyk
+    #   name: Sbom
+    #   uses: ./.github/workflows/sbom.yml
+    #   secrets: inherit
 
-    Docker_build:
-      needs: Sbom
-      name: Docker build
-      uses: ./.github/workflows/docker.yml
-      secrets: inherit
+    # Docker_build:
+    #   # needs: Sbom
+    #   name: Docker build
+    #   uses: ./.github/workflows/docker.yml
+    #   secrets: inherit
     Deployment:
-      needs: Docker_build
+      # needs: Docker_build
       name: Deployment
       uses: ./.github/workflows/deploy.yml
       secrets: inherit

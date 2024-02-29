@@ -2,7 +2,7 @@ name: javaapp deployment
 on:
   workflow_call:
 jobs:
-  build_and_test:
+  deployment:
       runs-on: ubuntu-latest
       steps:
       - name: Checkout
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          repository: GKprojects/Deployment   # Replace with the repository URL
+          repository: GKprojects/deployment   # Replace with the repository URL
           ref: main 
           token: ${{secrets.PAT_TOKEN }}
    
@@ -33,10 +33,10 @@ jobs:
   
       - name: Commit and Push Change
         run: |
-              git config --global user.name "Hamritha02"
-              git config --global user.email "hamrithaanand02@gmail.com"
+              git config --global user.name "GKprojects"
+              git config --global user.email "ponngokul98@gmail.com"
               git add deployment.yaml
-              git commit -m "Update image tag with github.run no."
-              git push origin main  
+              git commit -m "Update image with ${{ github.run_number }}"
+              git push
         env:
             PAT_TOKEN: ${{ secrets.PAT_TOKEN }}
