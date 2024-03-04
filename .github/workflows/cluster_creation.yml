@@ -21,14 +21,21 @@ jobs:
           terraform_version: 1.0.0  # Specify the Terraform version you want to use
 
       - name: Terraform Init
-        run: terraform init
+        run: |
+          cd EKS
+          terraform init
 
       - name: Terraform Plan
-        run: terraform plan -out=tfplan.out
+        run: |
+            cd EKS
+             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only apply changes on main branch push
-        run: terraform apply tfplan.out
+        run: | 
+          cd EKS
+          terraform apply -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}
         env:
           TF_INPUT: false  # Disable interactive mode
           TF_IN_AUTOMATION: true  # Set Terraform to automation mode
