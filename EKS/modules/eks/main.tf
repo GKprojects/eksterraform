@@ -31,53 +31,53 @@ resource "aws_iam_role_policy_attachment" "cluster-AmazonEKSClusterPolicy" {
   role       = aws_iam_role.cluster_role.name
 }
 #EKS creation
-resource "aws_kms_key" "example" {
-  description             = "MyEncryptionKey"
-  deletion_window_in_days = 10
-}
-resource "aws_iam_policy" "kms_policy" {
-  name        = "KMSKeyPolicy"
-  description = "IAM policy for KMS key usage"
-  policy      = jsonencode({
-    Version   = "2012-10-17",
-    Statement = [{
-      Effect   = "Allow",
-      Action   = [
-        "kms:Encrypt",
-        "kms:Decrypt"
-      ],
-      Resource = aws_kms_key.example.arn
-    }]
-  })
-}
-resource "aws_iam_role" "example" {
-  name               = "example-role"
-  assume_role_policy = jsonencode({
-    "Version": "2012-10-17",
-    "Statement": [{
-      "Effect": "Allow",
-      "Principal": {
-        "Service": "eks.amazonaws.com"
-      },
-      "Action": "sts:AssumeRole"
-    }]
-  })
-}
+# resource "aws_kms_key" "example" {
+#   description             = "MyEncryptionKey"
+#   deletion_window_in_days = 10
+# }
+# resource "aws_iam_policy" "kms_policy" {
+#   name        = "KMSKeyPolicy"
+#   description = "IAM policy for KMS key usage"
+#   policy      = jsonencode({
+#     Version   = "2012-10-17",
+#     Statement = [{
+#       Effect   = "Allow",
+#       Action   = [
+#         "kms:Encrypt",
+#         "kms:Decrypt"
+#       ],
+#       Resource = aws_kms_key.example.arn
+#     }]
+#   })
+# }
+# resource "aws_iam_role" "example" {
+#   name               = "example-role"
+#   assume_role_policy = jsonencode({
+#     "Version": "2012-10-17",
+#     "Statement": [{
+#       "Effect": "Allow",
+#       "Principal": {
+#         "Service": "eks.amazonaws.com"
+#       },
+#       "Action": "sts:AssumeRole"
+#     }]
+#   })
+# }
 
-resource "aws_iam_role_policy_attachment" "kms_attachment" {
-  role       = aws_iam_role.example.name
-  policy_arn = aws_iam_policy.kms_policy.arn
-}
+# resource "aws_iam_role_policy_attachment" "kms_attachment" {
+#   role       = aws_iam_role.example.name
+#   policy_arn = aws_iam_policy.kms_policy.arn
+# }
 
-data "aws_kms_key" "example" {
-  #key_id = "alias/Gokulaws"
-  key_id = aws_kms_key.example.key_id
+# data "aws_kms_key" "example" {
+#   #key_id = "alias/Gokulaws"
+#   key_id = aws_kms_key.example.key_id
 
-}
+# }
 
-output "kms_key_arn" {
-  value = data.aws_kms_key.example.arn
-}
+# output "kms_key_arn" {
+#   value = data.aws_kms_key.example.arn
+# }
 
 resource "aws_eks_cluster" "cluster" {
   name     = var.cluster_name
@@ -87,13 +87,13 @@ resource "aws_eks_cluster" "cluster" {
     subnet_ids = module.vpc.private_subnet_ids
   }
 
-  encryption_config {
-    resources = ["secrets"]  # Ensure resources are set to ["secrets"]
+  # encryption_config {
+  #   resources = ["secrets"]  # Ensure resources are set to ["secrets"]
 
-    provider {
-      key_arn = aws_kms_key.example.arn  # Use the ARN of your KMS key here
-    }
-  }
+  #   provider {
+  #     key_arn = aws_kms_key.example.arn  # Use the ARN of your KMS key here
+  #   }
+  # }
 
   depends_on = [aws_iam_role_policy_attachment.cluster-AmazonEKSClusterPolicy]
 }
@@ -135,7 +135,6 @@ resource "aws_eks_node_group" "private-nodes" {
 
   subnet_ids = module.vpc.private_subnet_ids
   
-
   capacity_type  = "ON_DEMAND"
   instance_types = [var.instance_types]
 
