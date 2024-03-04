@@ -75,11 +75,11 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: us-west-2
        - name: Set kubectl context
-         run: aws eks --region us-west-2 update-kubeconfig --name module-eks-demo
+         run: aws eks --region us-west-2 update-kubeconfig --name ekscluster
        - name: Checkout Repository
          uses: actions/checkout@v3
          with:
-            repository: Expleo-France/Deployment   
+            repository: GKprojects/deployment   
             token: ${{ secrets.PAT_TOKEN }}
        - name: Apply Kubernetes manifests
          run: |
