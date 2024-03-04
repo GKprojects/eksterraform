@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
   push:
      branches:
-       - master  # Modify as per your branch name
+       - master  
 
 jobs:
   terraform:
