@@ -32,7 +32,7 @@ jobs:
 
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only apply changes on main branch push
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only apply changes on main branch push
         run: | 
           cd EKS
           terraform apply -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}
