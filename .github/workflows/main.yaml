@@ -58,6 +58,7 @@ jobs:
       name: Deployment
       uses: ./.github/workflows/deploy.yml
       secrets: inherit
+      
     Deploy:
       runs-on: ubuntu-latest
       needs: Deployment 

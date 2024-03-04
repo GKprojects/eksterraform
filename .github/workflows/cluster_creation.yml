@@ -1,9 +1,10 @@
 name: Terraform Workflow
 
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - main  # Modify as per your branch name
+     branches:
+       - master  # Modify as per your branch name
 
 jobs:
   terraform:
