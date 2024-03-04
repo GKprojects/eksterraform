@@ -27,14 +27,13 @@ jobs:
       - name: Terraform Plan
         run: |
             cd EKS
-             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}" -lock=false
-
+             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
       - name: Terraform Apply
         # if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only apply changes on main branch push
         run: | 
           cd EKS
-          terraform apply -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}" --auto-approve -lock=false
+          terraform apply -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}" --auto-approve
         # env:
         #   TF_INPUT: false  # Disable interactive mode
         #   TF_IN_AUTOMATION: true  # Set Terraform to automation mode
