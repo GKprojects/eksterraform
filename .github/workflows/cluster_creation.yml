@@ -27,7 +27,7 @@ jobs:
       - name: Terraform Plan
         run: |
             cd EKS
-             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}" -lock=false
 
 
       - name: Terraform Apply
