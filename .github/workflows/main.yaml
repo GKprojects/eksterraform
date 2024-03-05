@@ -1,4 +1,4 @@
-name: MAIN
+name: MAIN_PIPELINE
 on:
   workflow_dispatch:
   push:
