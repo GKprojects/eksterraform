@@ -16,6 +16,7 @@ permissions:
     packages: write
     actions: write
     pull-requests: write
+    contents: read
     
 jobs:
     Talisman:
