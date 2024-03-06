@@ -29,11 +29,11 @@ jobs:
     #   uses: GKprojects/reusabletemplate/.github/workflows/KICS.yml@main
     #   secrets: inherit 
 
-    # Build_Test:
-    #   needs: KICS
-    #   name: Build and Test
-    #   uses: GKprojects/reusabletemplate/.github/workflows/Build_Test.yml@main
-    #   secrets: inherit
+    Build_Test:
+      # needs: KICS
+      name: Build and Test
+      uses: GKprojects/reusabletemplate/.github/workflows/Build_Test.yml@main
+      secrets: inherit
     
     # Snyk:
     #   needs: Build_Test
@@ -47,21 +47,21 @@ jobs:
     #   uses: GKprojects/reusabletemplate/.github/workflows/sbom.yml@main
     #   secrets: inherit
 
-    # Docker_build:
-    #   needs: Sbom
-    #   name: Docker build
-    #   uses: GKprojects/reusabletemplate/.github/workflows/docker.yml@main
-    #   secrets: inherit
+    Docker_build:
+      # needs: Sbom
+      name: Docker build
+      uses: GKprojects/reusabletemplate/.github/workflows/docker.yml@main
+      secrets: inherit
       
-    # Deployment:
-    #   needs: Docker_build
-    #   name: Deployment
-    #   uses: GKprojects/reusabletemplate/.github/workflows/deploy.yml@main
-    #   secrets: inherit
+    Deployment:
+      needs: Docker_build
+      name: Deployment
+      uses: GKprojects/reusabletemplate/.github/workflows/deploy.yml@main
+      secrets: inherit
       
     Deploy:
       runs-on: ubuntu-latest
-      # needs: Deployment 
+      needs: Deployment 
       steps:
        - name: Install Kubectl
          uses: azure/setup-kubectl@v3
