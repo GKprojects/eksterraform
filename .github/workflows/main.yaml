@@ -19,50 +19,50 @@ permissions:
     contents: read
     
 jobs:
-    Talisman:
-      name: Talisman
-      uses: GKprojects/reusabletemplate/.github/workflows/talisman.yml@main
-      secrets: inherit
-      #octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
-    KICS:
-      needs: Talisman
-      name: KICS
-      uses: GKprojects/reusabletemplate/.github/workflows/KICS.yml@main
-      secrets: inherit 
+    # Talisman:
+    #   name: Talisman
+    #   uses: GKprojects/reusabletemplate/.github/workflows/talisman.yml@main
+    #   secrets: inherit
+    #   #octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+    # KICS:
+    #   needs: Talisman
+    #   name: KICS
+    #   uses: GKprojects/reusabletemplate/.github/workflows/KICS.yml@main
+    #   secrets: inherit 
 
-    Build_Test:
-      needs: KICS
-      name: Build and Test
-      uses: GKprojects/reusabletemplate/.github/workflows/Build_Test.yml@main
-      secrets: inherit
+    # Build_Test:
+    #   needs: KICS
+    #   name: Build and Test
+    #   uses: GKprojects/reusabletemplate/.github/workflows/Build_Test.yml@main
+    #   secrets: inherit
     
-    Snyk:
-      needs: Build_Test
-      name: Snyk_security check
-      uses: GKprojects/reusabletemplate/.github/workflows/snyk.yml@main
-      secrets: inherit
+    # Snyk:
+    #   needs: Build_Test
+    #   name: Snyk_security check
+    #   uses: GKprojects/reusabletemplate/.github/workflows/snyk.yml@main
+    #   secrets: inherit
      
-    Sbom:
-      needs: Snyk
-      name: Sbom
-      uses: GKprojects/reusabletemplate/.github/workflows/sbom.yml@main
-      secrets: inherit
+    # Sbom:
+    #   needs: Snyk
+    #   name: Sbom
+    #   uses: GKprojects/reusabletemplate/.github/workflows/sbom.yml@main
+    #   secrets: inherit
 
-    Docker_build:
-      needs: Sbom
-      name: Docker build
-      uses: GKprojects/reusabletemplate/.github/workflows/docker.yml@main
-      secrets: inherit
+    # Docker_build:
+    #   needs: Sbom
+    #   name: Docker build
+    #   uses: GKprojects/reusabletemplate/.github/workflows/docker.yml@main
+    #   secrets: inherit
       
-    Deployment:
-      needs: Docker_build
-      name: Deployment
-      uses: GKprojects/reusabletemplate/.github/workflows/deploy.yml@main
-      secrets: inherit
+    # Deployment:
+    #   needs: Docker_build
+    #   name: Deployment
+    #   uses: GKprojects/reusabletemplate/.github/workflows/deploy.yml@main
+    #   secrets: inherit
       
     Deploy:
       runs-on: ubuntu-latest
-      needs: Deployment 
+      # needs: Deployment 
       steps:
        - name: Install Kubectl
          uses: azure/setup-kubectl@v3
@@ -76,7 +76,7 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             aws-region: us-west-2
        - name: Set kubectl context
-         run: aws eks --region us-west-2 update-kubeconfig --name ekscluster
+         run: aws eks --region us-east-1 update-kubeconfig --name ekscluster
        - name: Checkout Repository
          uses: actions/checkout@v3
          with:
