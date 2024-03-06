@@ -84,5 +84,5 @@ jobs:
             token: ${{ secrets.PAT_TOKEN }}
        - name: Apply Kubernetes manifests
          run: |
-          cd deployment
+          # cd deployment
           kubectl apply -f deployment.yaml -f service.yaml
