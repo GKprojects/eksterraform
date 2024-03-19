@@ -19,15 +19,15 @@ jobs:
         with:
           terraform_version: 1.0.0  # Specify the Terraform version you want to use
 
-      - name: Terraform Init
-        run: |
-          cd EKS
-          terraform init -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+      # - name: Terraform Init
+      #   run: |
+      #     cd EKS
+      #     terraform init -backend-config="access_key=${{ secrets.AWS_ACCESS_KEY_ID }}" -backend-config="secret_key=${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
-      - name: Terraform Plan
-        run: |
-            cd EKS
-             terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+      # - name: Terraform Plan
+      #   run: |
+      #       cd EKS
+      #        terraform plan -var access_key="${{ secrets.AWS_ACCESS_KEY_ID }}" -var secret_key="${{ secrets.AWS_SECRET_ACCESS_KEY }}"
 
       # - name: Terraform Apply
       #   # if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only apply changes on main branch push
